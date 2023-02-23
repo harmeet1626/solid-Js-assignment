@@ -21,16 +21,25 @@ const allProducts = () => {
       refetch();
     }
   }
-  const getProducts = async (search) =>
-    (
-      await fetch(
-        `https://dummyjson.com/products/search?q=${search}&limit=${limit()}&skip=${skip()}`
+  const getProducts = async (search) => {
+    if (searchInput()) {
+      return (await fetch(`https://dummyjson.com/products/search?q=${search}`))
+        .json()
+        .then((res) => {
+          return res.products;
+        });
+    } else {
+      return (
+        await fetch(
+          `https://dummyjson.com/products/search?q=${search}&limit=${limit()}&skip=${skip()}`
+        )
       )
-    )
-      .json()
-      .then((res) => {
-        return res.products;
-      });
+        .json()
+        .then((res) => {
+          return res.products;
+        });
+    }
+  };
   const [searchInput, setsearchInput] = createSignal("");
   const [Products, { mutate, refetch }] = createResource(
     searchInput,
@@ -112,7 +121,11 @@ const allProducts = () => {
       </div>
       <ul class="pagination">
         <li class="page-item">
-          <a style="cursor: pointer;" class="page-link" onClick={() => previous()}>
+          <a
+            style="cursor: pointer;"
+            class="page-link"
+            onClick={() => previous()}
+          >
             Previous
           </a>
         </li>
