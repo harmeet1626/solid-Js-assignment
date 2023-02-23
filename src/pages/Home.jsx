@@ -11,15 +11,6 @@ const Home = () => {
   }
   return (
     <>
-      {/* <div class="img"></div>
-      <div class="center">
-        <div class="title">This Amazing Website is created by Solid Js</div>
-        <div class="sub_title">Start Shopping Now!</div>
-        <div class="btns">
-          <button onClick={() => movetoProducts()}>Products</button>
-          <button onClick={() => movetoCategory()}>Category</button>
-        </div>
-      </div> */}
       <div class="container-fluid px-0 mb-5">
         <div
           id="header-carousel"

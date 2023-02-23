@@ -18,7 +18,7 @@ const localStorageKey = 'isLogin';
 createEffect(() => {
   // Update the value of the localStorage item whenever localStorageValue changes
   localStorage.setItem(localStorageKey, isLogin());
-  console.log(isLogin())
+  // console.log(isLogin())
 });
 
 

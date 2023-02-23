@@ -17,30 +17,6 @@ export default function navbar() {
   }
   return (
     <>
-      {/* <nav class="navbar navbar-expand-lg ">
-        <div class="container-fluid" style="background-color: #2e2e2e;">
-          <Drawer />
-          <br></br>
-          <A class="navbar-brand" href="/" style="color: white;">
-            Welcome {userDetails?.firstName}
-          </A>
-          <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
-
-            <div class="btn-toolbar pull-right">
-              <div class="btn-group">
-                <button
-                  onClick={() => logout()}
-                  type="button"
-                  class="btn btn-secondary"
-                >
-                  Logout
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav> */}
       <div class="container-fluid bg-primary text-white d-none d-lg-flex">
         <div class="container py-3">
           <div class="d-flex align-items-center">

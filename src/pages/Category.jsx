@@ -6,7 +6,6 @@ const Category = () => {
     (await fetch(`https://dummyjson.com/products/categories`)).json();
   const [categories] = createResource(getCategory);
 function openDetails(products){
-console.log(products)
 navigate(`/productsByCategory/${products}`)
 }
   return (

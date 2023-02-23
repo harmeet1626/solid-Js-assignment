@@ -112,12 +112,12 @@ const allProducts = () => {
       </div>
       <ul class="pagination">
         <li class="page-item">
-          <a class="page-link" onClick={() => previous()}>
+          <a style="cursor: pointer;" class="page-link" onClick={() => previous()}>
             Previous
           </a>
         </li>
         <li class="page-item">
-          <a class="page-link" onClick={() => next()}>
+          <a style="cursor: pointer;" class="page-link" onClick={() => next()}>
             Next
           </a>
         </li>
