@@ -1,5 +1,6 @@
-import { createSignal, createResource } from "solid-js";
+import { createSignal, createResource, onMount } from "solid-js";
 import { Routes, Route, useNavigate, A, useLocation } from "@solidjs/router";
+import { getStatus } from "./login";
 import "../style/index.css";
 const Home = () => {
   const navigate = useNavigate();
@@ -9,6 +10,10 @@ const Home = () => {
   function movetoCategory() {
     navigate("/category");
   }
+  onMount(async () => {
+    getStatus();
+  });
+
   return (
     <>
       <div class="container-fluid px-0 mb-5">

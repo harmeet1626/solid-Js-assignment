@@ -3,18 +3,17 @@ import Routes from "./routes/routes";
 import Navbar from "./components/Navbar";
 import { createSignal, createEffect, Show } from "solid-js";
 import { isLogin } from "./pages/login";
-import Test from './test'
+
 function App() {
-  
+  const [state, setstate] = createSignal();
   createEffect(() => {
-    console.log(isLogin())
+    setstate(isLogin());
   });
+
   return (
     <div>
-      {/* <button onClick={() => test()}>chk</button>
-      <Test/> */}
       <Toaster />
-      <Show when={isLogin() == true}>
+      <Show when={state()}>
         <Navbar />
       </Show>
       <Routes />

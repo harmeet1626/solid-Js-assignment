@@ -29,10 +29,6 @@ const allProducts = () => {
     searchInput,
     getProducts
   );
-  // const total = createMemo(() => {
-  //   console.log('Calculating Fibonacci');
-  //   return Products()?.total -8
-  // });
   function next() {
     if (skip() > 95) {
       toast.error("No more records");

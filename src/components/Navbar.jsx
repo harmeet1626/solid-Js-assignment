@@ -13,6 +13,7 @@ export default function navbar() {
   function logout() {
     setisLogin(false);
     isLogin();
+    localStorage.removeItem('isLogin')
     navigate("/login");
   }
   return (

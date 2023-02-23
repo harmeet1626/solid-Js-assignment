@@ -11,19 +11,13 @@ export const [userDetails, setuserDetails] = createStore({
   lastName: "",
   username: "",
 });
-export const [isLogin, setisLogin] = createSignal(false);
-// localStorage.setItem("isLogin",'')
-const localStorageKey = 'isLogin';
-// export const [isLogin, setisLogin] = createSignal(localStorage.getItem(localStorageKey));
-createEffect(() => {
-  // Update the value of the localStorage item whenever localStorageValue changes
-  localStorage.setItem(localStorageKey, isLogin());
-  // console.log(isLogin())
-});
+export const [isLogin, setisLogin] = createSignal(getStatus());
+export function getStatus(){
+  return localStorage.getItem('isLogin')
+}
 
 
 const login = () => {
-  const localStorage = window.localStorage;
   const [username, setusername] = createSignal("");
   const [password, setpassword] = createSignal("");
   const navigate = useNavigate();
@@ -33,11 +27,12 @@ const login = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          username: username(),
-          password: password(),
+          username: 'kminchelle',
+          password: '0lelplR',
         }),
       })
         .then((res) => res.json())
+        .then(localStorage.setItem('isLogin', JSON.stringify(true)))
         .then((res) => {
           if (!res.token) {
             toast.error("Check the creadentials");
