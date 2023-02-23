@@ -1,26 +1,11 @@
-import { createSignal, createResource, For } from "solid-js";
+import { createSignal, createResource, For, createMemo } from "solid-js";
 import { Routes, Route, useNavigate, A, useLocation } from "@solidjs/router";
 import toast from "solid-toast";
 const allProducts = () => {
+  const [searchInput, setsearchInput] = createSignal("");
   const navigate = useNavigate();
   const [limit, setlimit] = createSignal(8);
   const [skip, setskip] = createSignal(0);
-  function next() {
-    if (skip() > 80) {
-      toast.error("No more records");
-    } else {
-      setskip(skip() + 10);
-      refetch();
-    }
-  }
-  function previous() {
-    if (skip() < 10) {
-      toast.error("No more records");
-    } else {
-      setskip(skip() - 10);
-      refetch();
-    }
-  }
   const getProducts = async (search) => {
     if (searchInput()) {
       return (await fetch(`https://dummyjson.com/products/search?q=${search}`))
@@ -40,11 +25,33 @@ const allProducts = () => {
         });
     }
   };
-  const [searchInput, setsearchInput] = createSignal("");
   const [Products, { mutate, refetch }] = createResource(
     searchInput,
     getProducts
   );
+  // const total = createMemo(() => {
+  //   console.log('Calculating Fibonacci');
+  //   return Products()?.total -8
+  // });
+  function next() {
+    if (skip() > 95) {
+      toast.error("No more records");
+    } else {
+      setskip(skip() + 8);
+      refetch();
+    }
+  }
+  function previous() {
+    if (skip() == 0) {
+      toast.error("No more records");
+    } else {
+      setskip(skip() - 8);
+      refetch();
+    }
+  }
+ 
+  
+
 
   function moveToDetails(id) {
     navigate(`/ProductsDetails/${id}`);
