@@ -27,17 +27,17 @@ const login = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          username: 'kminchelle',
-          password: '0lelplR',
+          username: username(),
+          password: password(),
         }),
       })
         .then((res) => res.json())
-        .then(localStorage.setItem('isLogin', JSON.stringify(true)))
         .then((res) => {
           if (!res.token) {
             toast.error("Check the creadentials");
           } else {
             setisLogin(true);
+            localStorage.setItem('isLogin', JSON.stringify(true))
             toast.success("Welcome!");
             navigate("/");
             setuserDetails(
