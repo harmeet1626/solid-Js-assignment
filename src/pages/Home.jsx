@@ -41,7 +41,7 @@ const Home = () => {
                         Get the best out of market
                       </h1>
                       <A
-                        href="/category"
+                        href="/"
                         class="btn btn-primary rounded-pill py-3 px-5 animated slideInRight"
                       >
                         Explore More
@@ -223,7 +223,7 @@ const Home = () => {
                 </div>
                 <A
                   class="btn btn-primary rounded-pill py-3 px-5"
-                  href="/category"
+                  href="/"
                 >
                   Explore More
                 </A>

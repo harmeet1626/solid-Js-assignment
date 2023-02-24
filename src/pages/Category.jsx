@@ -1,13 +1,20 @@
 import { createSignal, createResource } from "solid-js";
-import { Routes, Route, useNavigate, A, useLocation, useParams } from "@solidjs/router";
+import {
+  Routes,
+  Route,
+  useNavigate,
+  A,
+  useLocation,
+  useParams,
+} from "@solidjs/router";
 const Category = () => {
-  const navigate =useNavigate()
+  const navigate = useNavigate();
   const getCategory = async () =>
     (await fetch(`https://dummyjson.com/products/categories`)).json();
   const [categories] = createResource(getCategory);
-function openDetails(products){
-navigate(`/productsByCategory/${products}`)
-}
+  function openDetails(products) {
+    navigate(`/productsByCategory/${products}`);
+  }
   return (
     <>
       <section style="background-color: #eee;">
@@ -19,7 +26,11 @@ navigate(`/productsByCategory/${products}`)
             <For each={categories()}>
               {(products, i) => (
                 <div class="col-lg-4 col-md-6 mb-4">
-                  <div style="cursor: pointer;" class="bg-image hover-zoom ripple shadow-1-strong rounded" onClick={()=>openDetails(products)}>
+                  <div
+                    style="cursor: pointer;"
+                    class="bg-image hover-zoom ripple shadow-1-strong rounded"
+                    onClick={() => openDetails(products)}
+                  >
                     <img
                       style="padding-left: 75px;"
                       src={`https://source.unsplash.com/160x160/?${products}`}

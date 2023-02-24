@@ -28,7 +28,10 @@ const routes = () => {
           component={requireAuth(ProductsDetails)}
         />
         <Route path="/Cart" component={requireAuth(Cart)} />
-        <Route path="/productsByCategory/:category" component={requireAuth(productsByCategory)} />
+        <Route
+          path="/productsByCategory/:category"
+          component={requireAuth(productsByCategory)}
+        />
       </Routes>
     </>
   );

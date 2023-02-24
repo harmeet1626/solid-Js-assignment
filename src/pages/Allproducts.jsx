@@ -45,9 +45,6 @@ const allProducts = () => {
       refetch();
     }
   }
- 
-  
-
 
   function moveToDetails(id) {
     navigate(`/ProductsDetails/${id}`);

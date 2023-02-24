@@ -72,7 +72,7 @@ const cart = () => {
                                   <div></div>
                                   <div class="ms-3">
                                     <h5>{products.title}</h5>
-                                    <p class="small mb-0">1TB, Graphite</p>
+                                    <p class="small mb-0"></p>
                                   </div>
                                 </div>
                                 <div class="d-flex flex-row align-items-center">

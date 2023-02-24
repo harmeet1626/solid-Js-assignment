@@ -8,13 +8,12 @@ import {
   useParams,
 } from "@solidjs/router";
 const productsByCategory = () => {
-
   const navigate = useNavigate();
   const Params = useParams();
   function getcategory() {
     return { ...Params }.category;
   }
-  
+
   const getProducts = async () =>
     (await fetch(`https://dummyjson.com/products/category/${getcategory()}`))
       .json()
