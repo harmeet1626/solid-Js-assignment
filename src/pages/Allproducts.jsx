@@ -11,7 +11,7 @@ const allProducts = () => {
       return (await fetch(`https://dummyjson.com/products/search?q=${search}`))
         .json()
         .then((res) => {
-          return res.products;
+          return res;
         });
     } else {
       return (
@@ -21,7 +21,7 @@ const allProducts = () => {
       )
         .json()
         .then((res) => {
-          return res.products;
+          return res;
         });
     }
   };
@@ -29,8 +29,9 @@ const allProducts = () => {
     searchInput,
     getProducts
   );
+  const totalPages = () => Products()?.total - limit();
   function next() {
-    if (skip() > 95) {
+    if (skip() > totalPages()) {
       toast.error("No more records");
     } else {
       setskip(skip() + 8);
@@ -38,7 +39,7 @@ const allProducts = () => {
     }
   }
   function previous() {
-    if (skip() == 0) {
+    if (skip() <= 0) {
       toast.error("No more records");
     } else {
       setskip(skip() - 8);
@@ -49,6 +50,7 @@ const allProducts = () => {
   function moveToDetails(id) {
     navigate(`/ProductsDetails/${id}`);
   }
+
   return (
     <>
       <div
@@ -75,7 +77,7 @@ const allProducts = () => {
         <section class="py-5" style="">
           <div class="container px-4 px-lg-5 mt-1">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-              <For each={Products()}>
+              <For each={Products()?.products}>
                 {(Product, i) => (
                   <div
                     class="col mb-5"
