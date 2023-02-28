@@ -1,29 +1,50 @@
-import { createSignal, createResource } from "solid-js";
+import { createSignal, createResource, createMemo } from "solid-js";
 import { userDetails, setuserDetails } from "./login";
 import toast, { Toaster } from "solid-toast";
+import { createStore, produce } from "solid-js/store";
+import { cartData, setcartData } from "../components/cartData";
 
 const cart = () => {
-  function delete_item() {
-    fetch(`https://dummyjson.com/carts/${userDetails?.id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.isDeleted) {
-          toast.success("Deleted successfully!");
-        } else {
-          toast.error("Can not delete product");
-        }
-      });
+  function delete_item(i) {
+    setcartData(
+      produce((data) => {
+        data.splice(i(), 1);
+      })
+    );
+    // fetch(`https://dummyjson.com/carts/${userDetails?.id}`, {
+    //   method: "DELETE",
+    // })
+    //   .then((res) => res.json())
+    //   .then((res) => {
+    //     if (res.isDeleted) {
+    //       toast.success("Deleted successfully!");
+    //     } else {
+    //       toast.error("Can not delete product");
+    //     }
+    //   });
   }
-  const getproducts = async () =>
-    (await fetch(`https://dummyjson.com/carts/${userDetails?.id}`))
-      .json()
-      .then((res) => {
-        return res;
-      });
+  const totalQty = createMemo(() => {
+    const sum = cartData.reduce((accumulator, object) => {
+      return accumulator + object.qty;
+    }, 0);
+    return sum;
+  });
+  const totalAmount = createMemo(() => {
+    const sum = cartData.reduce((accumulator, object) => {
+      return accumulator + object.price;
+    }, 0);
+    return sum;
+  });
+  // const getproducts = async () =>
+  //   (await fetch(`https://dummyjson.com/carts/${userDetails?.id}`))
+  //     .json()
+  //     .then((res) => {
+  //       return res;
+  //     });
 
-  const [product, setproducts] = createResource(getproducts);
+  // const [product, setproducts] = createResource(getproducts);
+  const [product, setproduct] = createStore([...cartData]);
+
   return (
     <>
       <section
@@ -49,8 +70,7 @@ const cart = () => {
                         <div>
                           <p class="mb-1">Shopping cart</p>
                           <p class="mb-0">
-                            You have {product()?.totalProducts} items in your
-                            cart
+                            You have {cartData?.length} items in your cart
                           </p>
                         </div>
                         <div>
@@ -63,7 +83,7 @@ const cart = () => {
                         </div>
                       </div>
 
-                      <For each={product()?.products}>
+                      <For each={cartData}>
                         {(products, i) => (
                           <div class="card mb-3 mb-lg-0">
                             <div class="card-body">
@@ -78,7 +98,7 @@ const cart = () => {
                                 <div class="d-flex flex-row align-items-center">
                                   <div style="width: 50px;">
                                     <h5 class="fw-normal mb-0">
-                                      {products.quantity}
+                                      {products.qty}
                                     </h5>
                                   </div>
                                   <div style="width: 80px;">
@@ -88,7 +108,7 @@ const cart = () => {
                                     <i class="fas fa-trash-alt"></i>
                                   </a>
                                   <button
-                                    onClick={() => delete_item()}
+                                    onClick={() => delete_item(i)}
                                     type="button"
                                     class="btn btn-primary"
                                   >
@@ -106,30 +126,31 @@ const cart = () => {
                         <div class="card-body">
                           <div class="d-flex justify-content-between ">
                             <p class="mb-2">totalProducts</p>
-                            <p class="mb-2">{product()?.totalProducts}</p>
+                            <p class="mb-2">{cartData?.length}</p>
                           </div>
                           <div class="d-flex justify-content-between ">
                             <p class="mb-2">Total Quantity</p>
-                            <p class="mb-2">{product()?.totalQuantity}</p>
+                            <p class="mb-2">{totalQty}</p>
                           </div>
                           <div class="d-flex justify-content-between">
                             <p class="mb-2">Total</p>
-                            <p class="mb-2">${product()?.total}</p>
+                            <p class="mb-2">${totalAmount}</p>
                           </div>
 
-                          <div class="d-flex justify-content-between">
+                          {/* <div class="d-flex justify-content-between">
                             <p class="mb-2">Discounted Total</p>
-                            <p class="mb-2">${product()?.discountedTotal}</p>
-                          </div>
+                            <p class="mb-2">${product?.length}</p>
+                          </div> */}
 
                           <button
                             type="button"
                             class="btn btn-info btn-block btn-lg"
                           >
                             <div class="d-flex justify-content-between">
-                              <span>${product()?.discountedTotal}</span>
+                              <span>${totalAmount}</span>
                               <span>
-                                Checkout{" "}
+                                {" "}
+                                Checkout
                                 <i class="fas fa-long-arrow-alt-right ms-2"></i>
                               </span>
                             </div>

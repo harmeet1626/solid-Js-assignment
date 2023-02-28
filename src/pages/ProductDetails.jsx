@@ -1,7 +1,10 @@
 import { useParams, useNavigate } from "@solidjs/router";
 import { Toast } from "solid-bootstrap";
 import { createSignal, For } from "solid-js";
+import { produce } from "solid-js/store";
 import toast, { Toaster } from "solid-toast";
+import { cartData, setcartData } from "../components/cartData";
+
 const productDetails = () => {
   const navigate = useNavigate();
   const [products, setproducts] = createSignal();
@@ -10,23 +13,47 @@ const productDetails = () => {
     return { ...Params }.id;
   }
   function addToCart() {
-    fetch("https://dummyjson.com/carts/add", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        userId: 1,
-        products: [
-          {
+    if (cartData.some((data) => data.id == getId())) {
+      toast.error("This item already exist in your cart");
+    } else {
+      setcartData(
+        produce((data) => {
+          data.push({
             id: getId(),
-            quantity: qty(),
-          },
-        ],
-      }),
-    })
-      .then((res) => res.json())
-      .then(toast.success(`Product added to the cart with qty of ${qty()}`))
-      .then(navigate("/Allproducts"));
+            title: products()[0]?.title,
+            qty: qty(),
+            price: products()[0]?.price,
+          });
+        })
+      );
+      toast.success('Item added to cart')
+      navigate('/cart')
+    }
+
+    // setcartData(produce(data)=>{
+    //   data.push({
+    //     title:products()?.title
+    //   })
+    // })
   }
+  // function addToCart() {
+  //   fetch("https://dummyjson.com/carts/add", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({
+  //       userId: 1,
+  //       products: [
+  //         {
+  //           id: getId(),
+  //           quantity: qty(),
+  //         },
+  //       ],
+  //     }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then(toast.success(`Product added to the cart with qty of ${qty()}`))
+  //     .then(navigate("/Allproducts"));
+  // }
   const [qty, setqty] = createSignal(1);
   async function getProducts() {
     await fetch(`https://dummyjson.com/products/${getId()}`)
