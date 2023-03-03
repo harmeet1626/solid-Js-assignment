@@ -151,6 +151,10 @@ const cart = () => {
                               <span>
                                 {" "}
                                 Checkout
+                                <stripe-buy-button
+                                  buy-button-id="buy_btn_1MhVrVSHH6lTciJeFXyDghG1"
+                                  publishable-key="pk_test_51Mg4qcSHH6lTciJepNZxG7YQJvNYcnXm58AXGOrt3hzfyPaxofrhn3LvVBfTzFmkgTh9DPG8AaHEzmjeNQ65FaCM00v5XlKKXf"
+                                ></stripe-buy-button>
                                 <i class="fas fa-long-arrow-alt-right ms-2"></i>
                               </span>
                             </div>
