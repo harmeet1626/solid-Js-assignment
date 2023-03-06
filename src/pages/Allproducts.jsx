@@ -121,22 +121,24 @@ const allProducts = () => {
           </div>
         </section>
       </div>
-      <ul class="pagination">
-        <li class="page-item">
-          <a
-            style="cursor: pointer;"
-            class="page-link"
-            onClick={() => previous()}
-          >
-            Previous
-          </a>
-        </li>
-        <li class="page-item">
-          <a style="cursor: pointer;" class="page-link" onClick={() => next()}>
-            Next
-          </a>
-        </li>
-      </ul>
+      <div style={"display:flex; justify-content:center;"}>
+        <ul class="pagination">
+          <li class="page-item">
+            <a
+              style="cursor: pointer;"
+              class="page-link"
+              onClick={() => previous()}
+            >
+              Previous
+            </a>
+          </li>
+          <li class="page-item">
+            <a style="cursor: pointer;" class="page-link" onClick={() => next()}>
+              Next
+            </a>
+          </li>
+        </ul>
+      </div>
     </>
   );
 };

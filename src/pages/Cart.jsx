@@ -63,7 +63,7 @@ const cart = () => {
   });
   const totalAmount = createMemo(() => {
     const sum = cartData.reduce((accumulator, object) => {
-      return accumulator + object.price;
+      return accumulator + (object.price * object.qty);
     }, 0);
     return sum;
   });
@@ -105,14 +105,7 @@ const cart = () => {
                             You have {cartData?.length} items in your cart
                           </p>
                         </div>
-                        <div>
-                          <p class="mb-0">
-                            <span class="text-muted">Sort by:</span>{" "}
-                            <a href="#!" class="text-body">
-                              price <i class="fas fa-angle-down mt-1"></i>
-                            </a>
-                          </p>
-                        </div>
+
                       </div>
 
                       <For each={cartData}>
