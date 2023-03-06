@@ -20,17 +20,17 @@ const routes = () => {
     <>
       <Routes>
         <Route path="/login" component={Login} />
-        <Route path="/" component={requireAuth(Home)} />
-        <Route path="/category" component={requireAuth(Category)} />
-        <Route path="/allProducts" component={requireAuth(Allproducts)} />
+        <Route path="/" component={(Home)} />
+        <Route path="/category" component={(Category)} />
+        <Route path="/allProducts" component={(Allproducts)} />
         <Route
           path="/ProductsDetails/:id"
-          component={requireAuth(ProductsDetails)}
+          component={(ProductsDetails)}
         />
-        <Route path="/Cart" component={requireAuth(Cart)} />
+        <Route path="/Cart" component={(Cart)} />
         <Route
           path="/productsByCategory/:category"
-          component={requireAuth(productsByCategory)}
+          component={(productsByCategory)}
         />
       </Routes>
     </>
