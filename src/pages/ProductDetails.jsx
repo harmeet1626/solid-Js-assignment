@@ -27,7 +27,7 @@ const productDetails = () => {
         })
       );
       toast.success('Item added to cart')
-      navigate('/cart')
+      // navigate('/cart')
     }
 
     // setcartData(produce(data)=>{

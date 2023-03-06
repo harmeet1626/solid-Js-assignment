@@ -23,6 +23,38 @@ const cart = () => {
     //     }
     //   });
   }
+
+
+
+  var stripe = Stripe('pk_test_51Mg4qcSHH6lTciJepNZxG7YQJvNYcnXm58AXGOrt3hzfyPaxofrhn3LvVBfTzFmkgTh9DPG8AaHEzmjeNQ65FaCM00v5XlKKXf');
+
+  function pay() {
+
+    stripe.redirectToCheckout({
+      lineItems: [{ price: 'price_1MiXSzSHH6lTciJeIXraVQrh', quantity: 1 }],
+      mode: 'payment',
+      /*
+       * Do not rely on the redirect to the successUrl for fulfilling
+       * purchases, customers may not always reach the success_url after
+       * a successful payment.
+       * Instead use one of the strategies described in
+       * https://stripe.com/docs/payments/checkout/fulfill-orders
+       */
+      successUrl: 'https://quiet-sundae-ecdf84.netlify.app/',
+      cancelUrl: 'https://example.com/canceled',
+    })
+    // .then(function (result) {
+    //   if (result.error) {
+
+    //     var displayError = document.getElementById('error-message');
+    //     displayError.textContent = result.error.message;
+    //   }
+    // });
+  }
+  ;
+
+
+
   const totalQty = createMemo(() => {
     const sum = cartData.reduce((accumulator, object) => {
       return accumulator + object.qty;
@@ -147,14 +179,11 @@ const cart = () => {
                             class="btn btn-info btn-block btn-lg"
                           >
                             <div class="d-flex justify-content-between">
+
                               <span>${totalAmount}</span>
-                              <span>
-                                {" "}
+                              <span onClick={() => pay()}>
+
                                 Checkout
-                                <stripe-buy-button
-                                  buy-button-id="buy_btn_1MhVrVSHH6lTciJeFXyDghG1"
-                                  publishable-key="pk_test_51Mg4qcSHH6lTciJepNZxG7YQJvNYcnXm58AXGOrt3hzfyPaxofrhn3LvVBfTzFmkgTh9DPG8AaHEzmjeNQ65FaCM00v5XlKKXf"
-                                ></stripe-buy-button>
                                 <i class="fas fa-long-arrow-alt-right ms-2"></i>
                               </span>
                             </div>
