@@ -109,7 +109,8 @@ const login = () => {
                     />
                     <label class="form-check-label" for="form2Example3">
                       Remember me
-                    </label>
+                    </label><br></br>
+                    <a href="/">Login later</a>
                   </div>
                 </div>
 

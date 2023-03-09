@@ -33,28 +33,10 @@ const cart = () => {
     stripe.redirectToCheckout({
       lineItems: [{ price: 'price_1MiXSzSHH6lTciJeIXraVQrh', quantity: 1 }],
       mode: 'payment',
-      /*
-       * Do not rely on the redirect to the successUrl for fulfilling
-       * purchases, customers may not always reach the success_url after
-       * a successful payment.
-       * Instead use one of the strategies described in
-       * https://stripe.com/docs/payments/checkout/fulfill-orders
-       */
       successUrl: 'https://quiet-sundae-ecdf84.netlify.app/',
       cancelUrl: 'https://example.com/canceled',
     })
-    // .then(function (result) {
-    //   if (result.error) {
-
-    //     var displayError = document.getElementById('error-message');
-    //     displayError.textContent = result.error.message;
-    //   }
-    // });
-  }
-  ;
-
-
-
+  };
   const totalQty = createMemo(() => {
     const sum = cartData.reduce((accumulator, object) => {
       return accumulator + object.qty;
@@ -76,9 +58,9 @@ const cart = () => {
 
   // const [product, setproducts] = createResource(getproducts);
   const [product, setproduct] = createStore([...cartData]);
-
   return (
     <>
+
       <section
         class="h-100 h-custom"
         style="background-color: #eee; height: 100vh !important;"
@@ -105,9 +87,7 @@ const cart = () => {
                             You have {cartData?.length} items in your cart
                           </p>
                         </div>
-
                       </div>
-
                       <For each={cartData}>
                         {(products, i) => (
                           <div class="card mb-3 mb-lg-0">
@@ -121,24 +101,76 @@ const cart = () => {
                                   </div>
                                 </div>
                                 <div class="d-flex flex-row align-items-center">
-                                  <div style="width: 50px;">
+
+                                  <div style="width: 80px;">
+                                    <h5 class="mb-0">${products.price}</h5>
+                                  </div>
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      if (products.qty > 1) {
+                                        setcartData(
+                                          produce((data) => {
+                                            data[i()].qty = data[i()].qty - 1
+                                          })
+                                        )
+                                      }
+                                    }}
+                                  >
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      width="16"
+                                      height="16"
+                                      fill="currentColor"
+                                      class="bi bi-bag-dash-fill"
+                                      viewBox="0 0 16 16"
+                                    >
+                                      <path
+                                        fill-rule="evenodd"
+                                        d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM6 9.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6z"
+                                      />
+                                    </svg>
+                                  </button>
+                                  <div style="width: 30px; padding-left:10px; white-space: nowrap;">
                                     <h5 class="fw-normal mb-0">
                                       {products.qty}
                                     </h5>
-                                  </div>
-                                  <div style="width: 80px;">
-                                    <h5 class="mb-0">${products.price}</h5>
+                                  </div><div style={
+                                    'padding-left:2px;'
+                                  }>
+                                    <button type="button" onClick={() => setcartData(
+                                      produce((data) => {
+                                        data[i()].qty = data[i()].qty + 1
+                                      })
+                                    )}>
+                                      <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="16"
+                                        fill="currentColor"
+                                        class="bi bi-bag-plus-fill"
+                                        viewBox="0 0 16 16"
+                                      >
+                                        <path
+                                          fill-rule="evenodd"
+                                          d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z"
+                                        />
+                                      </svg>
+                                    </button>
                                   </div>
                                   <a href="#!" style="color: #cecece;">
                                     <i class="fas fa-trash-alt"></i>
                                   </a>
-                                  <button
-                                    onClick={() => delete_item(i)}
-                                    type="button"
-                                    class="btn btn-primary"
-                                  >
-                                    Delete
-                                  </button>
+                                  <div style={"padding-left:50px;"}>
+                                    <button
+                                      onClick={() => delete_item(i)}
+                                      type="button"
+                                      class="btn btn-primary"
+                                    >
+                                      Delete
+                                    </button>
+                                  </div>
+
                                 </div>
                               </div>
                             </div>
@@ -150,7 +182,7 @@ const cart = () => {
                       <div class="card bg-primary text-white rounded-3">
                         <div class="card-body">
                           <div class="d-flex justify-content-between ">
-                            <p class="mb-2">totalProducts</p>
+                            <p class="mb-2">Total Products</p>
                             <p class="mb-2">{cartData?.length}</p>
                           </div>
                           <div class="d-flex justify-content-between ">

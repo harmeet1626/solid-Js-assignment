@@ -22,21 +22,8 @@ export default function navbar() {
       <div class="container-fluid  text-white d-none d-lg-flex" style={"background-color:#413d91"}>
         <div class="container py-3" >
           <div class="d-flex align-items-center">
-
             <h2 class="text-white fw-bold m-0">Product Store</h2>
 
-            <div class="ms-auto d-flex align-items-center">
-              <small class="ms-4">
-                <i class="fa fa-map-marker-alt me-3"></i> Sector 67, Sahibzada
-                Ajit Singh Nagar, Punjab 160062
-              </small>
-              <small class="ms-4">
-                <i class="fa fa-envelope me-3"></i>info@softprodigy.com
-              </small>
-              <small class="ms-4">
-                <i class="fa fa-phone-alt me-3"></i>+012 345 67890
-              </small>
-            </div>
             <Show when={isLogin()} fallback={<div class="ms-auto d-none d-lg-block">
               <a
                 onClick={() => navigate('/login')}

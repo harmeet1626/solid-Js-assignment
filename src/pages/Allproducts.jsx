@@ -56,7 +56,7 @@ const allProducts = () => {
       <div
         class="input-group rounded"
         style=" width: 37%;
-    padding-left: 100px;"
+        padding-left: 100px;"
       >
         <input
           onInput={(e) => setsearchInput(e.currentTarget.value)}
@@ -66,9 +66,6 @@ const allProducts = () => {
           aria-label="Search"
           aria-describedby="search-addon"
         />
-        <span class="input-group-text border-0" id="search-addon">
-          <i class="fas fa-search"></i>
-        </span>
       </div>
       <div class="text-center container py-1">
         <h2 class="my-2 mt-3 mb-1">
