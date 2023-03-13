@@ -69,7 +69,7 @@ const allProducts = () => {
       </div>
       <div class="text-center container py-1">
         <h2 class="my-2 mt-3 mb-1">
-          <strong>Bestsellers</strong>
+          <strong>Products</strong>
         </h2>
         <section class="py-5" style="">
           <div class="container px-4 px-lg-5 mt-1">
