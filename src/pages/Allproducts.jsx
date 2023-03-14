@@ -1,19 +1,25 @@
 import { createSignal, createResource, For, createMemo } from "solid-js";
 import { Routes, Route, useNavigate, A, useLocation } from "@solidjs/router";
 import toast from "solid-toast";
+import '../style/loading.css'
+
 const allProducts = () => {
   const [searchInput, setsearchInput] = createSignal("");
   const navigate = useNavigate();
   const [limit, setlimit] = createSignal(8);
   const [skip, setskip] = createSignal(0);
+  const [isLoading, setisLoading] = createSignal(false);
   const getProducts = async (search) => {
     if (searchInput()) {
+      setisLoading(true);
       return (await fetch(`https://dummyjson.com/products/search?q=${search}`))
         .json()
         .then((res) => {
+          setisLoading(false);
           return res;
         });
     } else {
+      setisLoading(true);
       return (
         await fetch(
           `https://dummyjson.com/products/search?q=${search}&limit=${limit()}&skip=${skip()}`
@@ -21,6 +27,7 @@ const allProducts = () => {
       )
         .json()
         .then((res) => {
+          setisLoading(false);
           return res;
         });
     }
@@ -67,6 +74,7 @@ const allProducts = () => {
           aria-describedby="search-addon"
         />
       </div>
+      {isLoading() == true ? <div class="loader"></div> : 
       <div class="text-center container py-1">
         <h2 class="my-2 mt-3 mb-1">
           <strong>Products</strong>
@@ -117,7 +125,6 @@ const allProducts = () => {
             </div>
           </div>
         </section>
-      </div>
       <div style={"display:flex; justify-content:center;"}>
         <ul class="pagination">
           <li class="page-item">
@@ -136,6 +143,7 @@ const allProducts = () => {
           </li>
         </ul>
       </div>
+      </div>}
     </>
   );
 };
