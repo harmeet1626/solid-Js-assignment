@@ -221,10 +221,7 @@ const Home = () => {
                     <span>Clita erat ipsum et lorem et sit sed stet lorem</span>
                   </div>
                 </div>
-                <A
-                  class="btn btn-primary rounded-pill py-3 px-5"
-                  href="/"
-                >
+                <A class="btn btn-primary rounded-pill py-3 px-5" href="/">
                   Explore More
                 </A>
               </div>

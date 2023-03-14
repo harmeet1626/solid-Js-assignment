@@ -26,10 +26,11 @@ const productDetails = () => {
           });
         })
       );
-      toast.success('Item added to cart')
+      toast.success("Item added to cart");
       // navigate('/cart')
     }
 
+    // if server side cart functionnality required
     // setcartData(produce(data)=>{
     //   data.push({
     //     title:products()?.title

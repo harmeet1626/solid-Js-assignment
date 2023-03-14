@@ -11,6 +11,8 @@ const cart = () => {
         data.splice(i(), 1);
       })
     );
+
+    // if server side cart functionnality required
     // fetch(`https://dummyjson.com/carts/${userDetails?.id}`, {
     //   method: "DELETE",
     // })
@@ -24,19 +26,18 @@ const cart = () => {
     //   });
   }
 
-
-
-  var stripe = Stripe('pk_test_51Mg4qcSHH6lTciJepNZxG7YQJvNYcnXm58AXGOrt3hzfyPaxofrhn3LvVBfTzFmkgTh9DPG8AaHEzmjeNQ65FaCM00v5XlKKXf');
+  var stripe = Stripe(
+    "pk_test_51Mg4qcSHH6lTciJepNZxG7YQJvNYcnXm58AXGOrt3hzfyPaxofrhn3LvVBfTzFmkgTh9DPG8AaHEzmjeNQ65FaCM00v5XlKKXf"
+  );
 
   function pay() {
-
     stripe.redirectToCheckout({
-      lineItems: [{ price: 'price_1MiXSzSHH6lTciJeIXraVQrh', quantity: 1 }],
-      mode: 'payment',
-      successUrl: 'https://quiet-sundae-ecdf84.netlify.app/',
-      cancelUrl: 'https://example.com/canceled',
-    })
-  };
+      lineItems: [{ price: "price_1MiXSzSHH6lTciJeIXraVQrh", quantity: 1 }],
+      mode: "payment",
+      successUrl: "https://quiet-sundae-ecdf84.netlify.app/",
+      cancelUrl: "https://example.com/canceled",
+    });
+  }
   const totalQty = createMemo(() => {
     const sum = cartData.reduce((accumulator, object) => {
       return accumulator + object.qty;
@@ -45,10 +46,12 @@ const cart = () => {
   });
   const totalAmount = createMemo(() => {
     const sum = cartData.reduce((accumulator, object) => {
-      return accumulator + (object.price * object.qty);
+      return accumulator + object.price * object.qty;
     }, 0);
     return sum;
   });
+
+  // if server side cart functionnality required
   // const getproducts = async () =>
   //   (await fetch(`https://dummyjson.com/carts/${userDetails?.id}`))
   //     .json()
@@ -60,7 +63,6 @@ const cart = () => {
   const [product, setproduct] = createStore([...cartData]);
   return (
     <>
-
       <section
         class="h-100 h-custom"
         style="background-color: #eee; height: 100vh !important;"
@@ -101,7 +103,6 @@ const cart = () => {
                                   </div>
                                 </div>
                                 <div class="d-flex flex-row align-items-center">
-
                                   <div style="width: 80px;">
                                     <h5 class="mb-0">${products.price}</h5>
                                   </div>
@@ -111,9 +112,9 @@ const cart = () => {
                                       if (products.qty > 1) {
                                         setcartData(
                                           produce((data) => {
-                                            data[i()].qty = data[i()].qty - 1
+                                            data[i()].qty = data[i()].qty - 1;
                                           })
-                                        )
+                                        );
                                       }
                                     }}
                                   >
@@ -135,14 +136,18 @@ const cart = () => {
                                     <h5 class="fw-normal mb-0">
                                       {products.qty}
                                     </h5>
-                                  </div><div style={
-                                    'padding-left:2px;'
-                                  }>
-                                    <button type="button" onClick={() => setcartData(
-                                      produce((data) => {
-                                        data[i()].qty = data[i()].qty + 1
-                                      })
-                                    )}>
+                                  </div>
+                                  <div style={"padding-left:2px;"}>
+                                    <button
+                                      type="button"
+                                      onClick={() =>
+                                        setcartData(
+                                          produce((data) => {
+                                            data[i()].qty = data[i()].qty + 1;
+                                          })
+                                        )
+                                      }
+                                    >
                                       <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="16"
@@ -170,7 +175,6 @@ const cart = () => {
                                       Delete
                                     </button>
                                   </div>
-
                                 </div>
                               </div>
                             </div>
@@ -193,21 +197,13 @@ const cart = () => {
                             <p class="mb-2">Total</p>
                             <p class="mb-2">${totalAmount}</p>
                           </div>
-
-                          {/* <div class="d-flex justify-content-between">
-                            <p class="mb-2">Discounted Total</p>
-                            <p class="mb-2">${product?.length}</p>
-                          </div> */}
-
                           <button
                             type="button"
                             class="btn btn-info btn-block btn-lg"
                           >
                             <div class="d-flex justify-content-between">
-
                               <span>${totalAmount}</span>
                               <span onClick={() => pay()}>
-
                                 Checkout
                                 <i class="fas fa-long-arrow-alt-right ms-2"></i>
                               </span>
