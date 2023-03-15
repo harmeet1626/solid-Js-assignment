@@ -81,7 +81,6 @@ const cart = () => {
                         </a>
                       </h5>
                       <hr />
-
                       <div class="d-flex justify-content-between align-items-center mb-4">
                         <div>
                           <p class="mb-1">Shopping cart</p>
