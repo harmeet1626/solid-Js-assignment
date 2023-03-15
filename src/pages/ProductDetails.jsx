@@ -95,33 +95,6 @@ const productDetails = () => {
                       src={product.thumbnail}
                       data-original-title="Usuario"
                     />
-                    <ul title="Ratings" class="list-inline ratings text-center">
-                      <li>
-                        <a>
-                          <span class="glyphicon glyphicon-star"></span>
-                        </a>
-                      </li>
-                      <li>
-                        <a>
-                          <span class="glyphicon glyphicon-star"></span>
-                        </a>
-                      </li>
-                      <li>
-                        <a>
-                          <span class="glyphicon glyphicon-star"></span>
-                        </a>
-                      </li>
-                      <li>
-                        <a>
-                          <span class="glyphicon glyphicon-star"></span>
-                        </a>
-                      </li>
-                      <li>
-                        <a>
-                          <span class="glyphicon glyphicon-star"></span>
-                        </a>
-                      </li>
-                    </ul>
                   </div>
                   <div class="col-md-6">
                     <strong>Information</strong>
