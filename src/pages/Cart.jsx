@@ -35,7 +35,7 @@ const cart = () => {
       lineItems: [{ price: "price_1MiXSzSHH6lTciJeIXraVQrh", quantity: 1 }],
       mode: "payment",
       successUrl: "https://shoppinguser.netlify.app/",
-      cancelUrl: "https://example.com/canceled",
+      cancelUrl: "https://shoppinguser.netlify.app/",
     });
   }
   const totalQty = createMemo(() => {
