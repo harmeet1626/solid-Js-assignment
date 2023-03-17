@@ -1,15 +1,8 @@
-import { createSignal, createResource, onMount } from "solid-js";
-import { Routes, Route, useNavigate, A, useLocation } from "@solidjs/router";
+import { onMount } from "solid-js";
+import { A } from "@solidjs/router";
 import { getStatus } from "./login";
 import "../style/index.css";
 const Home = () => {
-  const navigate = useNavigate();
-  function movetoProducts() {
-    navigate("/allProducts");
-  }
-  function movetoCategory() {
-    navigate("/category");
-  }
   onMount(async () => {
     getStatus();
   });

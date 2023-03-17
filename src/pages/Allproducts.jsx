@@ -1,5 +1,5 @@
-import { createSignal, createResource, For, createMemo } from "solid-js";
-import { Routes, Route, useNavigate, A, useLocation } from "@solidjs/router";
+import { createSignal, createResource, For } from "solid-js";
+import { useNavigate } from "@solidjs/router";
 import toast from "solid-toast";
 import "../style/loading.css";
 

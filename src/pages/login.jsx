@@ -1,5 +1,5 @@
-import { createSignal, createEffect } from "solid-js";
-import toast, { Toaster } from "solid-toast";
+import { createSignal } from "solid-js";
+import toast from "solid-toast";
 import { createStore, produce } from "solid-js/store";
 import { useNavigate } from "@solidjs/router";
 export const [userDetails, setuserDetails] = createStore({

@@ -1,12 +1,8 @@
-import { Button } from "solid-bootstrap";
 import { isLogin, setisLogin } from "../pages/login";
-import { createSignal, createMemo, Show } from "solid-js";
+import { Show } from "solid-js";
 import "../css/bootstrap.min.css";
 import "../css/style.css";
-import { Routes, Route, useNavigate, A, useLocation } from "@solidjs/router";
-import { userDetails } from "../pages/login";
-import Category from "../pages/Category";
-import Drawer from "../components/Drawer";
+import { useNavigate, A } from "@solidjs/router";
 import { cartData } from "./cartData";
 
 export default function navbar() {

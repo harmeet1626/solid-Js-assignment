@@ -1,7 +1,7 @@
-import { Routes, Route, useNavigate, useLocation } from "@solidjs/router";
+import { Routes, Route, useNavigate } from "@solidjs/router";
 import Login from "../pages/login";
 import Home from "../pages/Home";
-import { isLogin, setisLogin } from "../pages/login";
+import { isLogin } from "../pages/login";
 import Category from "../pages/Category";
 import Allproducts from "../pages/Allproducts";
 import ProductsDetails from "../pages/ProductDetails";

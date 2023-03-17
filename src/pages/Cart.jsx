@@ -1,6 +1,4 @@
-import { createSignal, createResource, createMemo } from "solid-js";
-import { userDetails, setuserDetails } from "./login";
-import toast, { Toaster } from "solid-toast";
+import { createMemo } from "solid-js";
 import { createStore, produce } from "solid-js/store";
 import { cartData, setcartData } from "../components/cartData";
 

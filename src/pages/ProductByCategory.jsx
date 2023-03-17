@@ -1,12 +1,5 @@
-import { createSignal, createEffect, createResource, For } from "solid-js";
-import {
-  Routes,
-  Route,
-  useNavigate,
-  A,
-  useLocation,
-  useParams,
-} from "@solidjs/router";
+import { createResource, For } from "solid-js";
+import { useNavigate, useParams } from "@solidjs/router";
 const productsByCategory = () => {
   const navigate = useNavigate();
   const Params = useParams();

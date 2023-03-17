@@ -1,12 +1,10 @@
-import { useParams, useNavigate } from "@solidjs/router";
-import { Toast } from "solid-bootstrap";
+import { useParams } from "@solidjs/router";
 import { createSignal, For } from "solid-js";
 import { produce } from "solid-js/store";
-import toast, { Toaster } from "solid-toast";
+import toast from "solid-toast";
 import { cartData, setcartData } from "../components/cartData";
 
 const productDetails = () => {
-  const navigate = useNavigate();
   const [products, setproducts] = createSignal();
   const [isLoading, setisLoading] = createSignal(false);
   const { ...Params } = useParams();

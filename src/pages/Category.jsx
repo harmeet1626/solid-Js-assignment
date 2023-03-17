@@ -1,12 +1,5 @@
-import { createSignal, createResource } from "solid-js";
-import {
-  Routes,
-  Route,
-  useNavigate,
-  A,
-  useLocation,
-  useParams,
-} from "@solidjs/router";
+import { createResource } from "solid-js";
+import { useNavigate } from "@solidjs/router";
 const Category = () => {
   const navigate = useNavigate();
   const getCategory = async () =>
