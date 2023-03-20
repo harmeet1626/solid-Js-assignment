@@ -2,24 +2,45 @@ import { createSignal } from "solid-js";
 import toast from "solid-toast";
 import { createStore, produce } from "solid-js/store";
 import { useNavigate } from "@solidjs/router";
-export const [userDetails, setuserDetails] = createStore({
-  id: "",
-  email: "",
-  firstName: "",
-  gender: "",
-  image: "",
-  lastName: "",
-  username: "",
-});
-export const [isLogin, setisLogin] = createSignal(getStatus());
+export const [userDetails, setuserDetails] = createStore({});
 export function getStatus() {
   return localStorage.getItem("isLogin");
+}
+export function getUserDetails() {
+  setuserDetails({
+    id: parseJwt(localStorage.getItem("token"))?.id,
+    email: parseJwt(localStorage.getItem("token"))?.email,
+    firstName: parseJwt(localStorage.getItem("token"))?.firstName,
+    gender: parseJwt(localStorage.getItem("token"))?.gender,
+    image: parseJwt(localStorage.getItem("token"))?.image,
+    lastName: parseJwt(localStorage.getItem("token"))?.lastName,
+    username: parseJwt(localStorage.getItem("token"))?.username,
+  });
+}
+function parseJwt(token) {
+  if (token !== null) {
+    var base64Url = token.split(".")[1];
+    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    var jsonPayload = decodeURIComponent(
+      window
+        .atob(base64)
+        .split("")
+        .map(function (c) {
+          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join("")
+    );
+    return JSON.parse(jsonPayload);
+  } else {
+    return null;
+  }
 }
 
 const login = () => {
   const [username, setusername] = createSignal("");
   const [password, setpassword] = createSignal("");
   const navigate = useNavigate();
+
   function login() {
     try {
       fetch("https://dummyjson.com/auth/login", {
@@ -32,24 +53,15 @@ const login = () => {
       })
         .then((res) => res.json())
         .then((res) => {
-          if (!res.token) {
-            toast.error("Check the creadentials");
-          } else {
-            setisLogin(true);
-            localStorage.setItem("isLogin", JSON.stringify(true));
+          if (res.token) {
+            const token = res.token;
+            localStorage.setItem("token", JSON.stringify(token));
+
             toast.success("Welcome!");
             navigate("/");
-            setuserDetails(
-              produce((details) => {
-                (details.id = res.id),
-                  (details.email = res.email),
-                  (details.firstName = res.firstName),
-                  (details.gender = res.gender),
-                  (details.image = res.image),
-                  (details.lastName = res.lastName),
-                  (details.username = res.username);
-              })
-            );
+            getUserDetails();
+          } else {
+            toast.error("Check the creadentials");
           }
         });
     } catch (e) {

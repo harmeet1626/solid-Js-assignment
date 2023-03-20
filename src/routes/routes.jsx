@@ -1,7 +1,6 @@
 import { Routes, Route, useNavigate } from "@solidjs/router";
 import Login from "../pages/login";
 import Home from "../pages/Home";
-import { isLogin } from "../pages/login";
 import Category from "../pages/Category";
 import Allproducts from "../pages/Allproducts";
 import ProductsDetails from "../pages/ProductDetails";
@@ -9,13 +8,7 @@ import Cart from "../pages/Cart";
 import productsByCategory from "../pages/ProductByCategory";
 const routes = () => {
   const navigate = useNavigate();
-  function requireAuth(component) {
-    if (!isLogin()) {
-      navigate("/login");
-      return null;
-    }
-    return component;
-  }
+
   return (
     <>
       <Routes>

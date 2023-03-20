@@ -1,16 +1,13 @@
-import { isLogin, setisLogin } from "../pages/login";
 import { Show } from "solid-js";
 import "../css/bootstrap.min.css";
 import "../css/style.css";
 import { useNavigate, A } from "@solidjs/router";
 import { cartData } from "./cartData";
-
+import { userDetails } from "../pages/login";
 export default function navbar() {
   const navigate = useNavigate();
   function logout() {
-    setisLogin(false);
-    isLogin();
-    localStorage.removeItem("isLogin");
+    localStorage.removeItem("token");
     navigate("/login");
   }
   return (
@@ -21,10 +18,15 @@ export default function navbar() {
       >
         <div class="container py-3">
           <div class="d-flex align-items-center">
-            <h2 class="text-white fw-bold m-0">Product Store</h2>
+            <Show when={userDetails?.firstName}>
+              <h2 class="text-white fw-bold m-0">
+                {" "}
+                {`Hi ${userDetails.firstName}`}
+              </h2>
+            </Show>
 
             <Show
-              when={isLogin()}
+              when={userDetails.id}
               fallback={
                 <div class="ms-auto d-none d-lg-block">
                   <a

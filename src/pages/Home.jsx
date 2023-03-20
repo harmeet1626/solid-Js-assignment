@@ -1,12 +1,7 @@
 import { onMount } from "solid-js";
 import { A } from "@solidjs/router";
-import { getStatus } from "./login";
 import "../style/index.css";
 const Home = () => {
-  onMount(async () => {
-    getStatus();
-  });
-
   return (
     <>
       <div class="container-fluid px-0 mb-5">
