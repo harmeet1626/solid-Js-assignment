@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate } from "@solidjs/router";
+import { useRoutes } from "@solidjs/router";
 import Login from "../pages/login";
 import Home from "../pages/Home";
 import Category from "../pages/Category";
@@ -6,22 +6,40 @@ import Allproducts from "../pages/Allproducts";
 import ProductsDetails from "../pages/ProductDetails";
 import Cart from "../pages/Cart";
 import productsByCategory from "../pages/ProductByCategory";
+
 const routes = () => {
-  const navigate = useNavigate();
+  const routes = [
+    {
+      path: "/",
+      component: Home,
+    },
+    {
+      path: "/category",
+      component: Category,
+    },
+    {
+      path: "/allProducts",
+      component: Allproducts,
+    },
+    {
+      path: "/ProductsDetails/:id",
+      component: ProductsDetails,
+    },
+    {
+      path: "/Cart",
+      component: Cart,
+    },
+    {
+      path: "/productsByCategory/:category",
+      component: productsByCategory,
+    },
+  ];
+  const Routes = useRoutes(routes);
 
   return (
     <>
       <Routes>
-        <Route path="/login" component={Login} />
-        <Route path="/" component={Home} />
-        <Route path="/category" component={Category} />
-        <Route path="/allProducts" component={Allproducts} />
-        <Route path="/ProductsDetails/:id" component={ProductsDetails} />
-        <Route path="/Cart" component={Cart} />
-        <Route
-          path="/productsByCategory/:category"
-          component={productsByCategory}
-        />
+        <Routes />
       </Routes>
     </>
   );
