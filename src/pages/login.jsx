@@ -1,5 +1,6 @@
 import { createSignal } from "solid-js";
 import toast from "solid-toast";
+import jwt_decode from "jwt-decode";
 import { createStore, produce } from "solid-js/store";
 import { useNavigate } from "@solidjs/router";
 export const [userDetails, setuserDetails] = createStore({});
@@ -19,18 +20,8 @@ export function getUserDetails() {
 }
 function parseJwt(token) {
   if (token !== null) {
-    var base64Url = token.split(".")[1];
-    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-    var jsonPayload = decodeURIComponent(
-      window
-        .atob(base64)
-        .split("")
-        .map(function (c) {
-          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-        })
-        .join("")
-    );
-    return JSON.parse(jsonPayload);
+    var decoded = jwt_decode(token);
+    return decoded
   } else {
     return null;
   }
@@ -56,7 +47,6 @@ const login = () => {
           if (res.token) {
             const token = res.token;
             localStorage.setItem("token", JSON.stringify(token));
-
             toast.success("Welcome!");
             navigate("/");
             getUserDetails();
